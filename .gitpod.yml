@@ -1,5 +1,16 @@
 image: gitpod/workspace-mysql
 
 tasks:
-  - init: 'echo "TODO: Replace with init/build command"'
+  - init: mysqladmin --user=root password rootpassword && 
+          mvn dependency:get -Dartifact='mysql:mysql-connector-java:8.0.20' &&
+          ./set-install-properties.sh &&
+          cd atlas &&
+          mvn -am -pl security-admin,embeddedwebserver,jisql -DskipTests package &&
+          cd security-admin/scripts &&
+          mkdir -p jisql/lib &&
+          ln -s /workspace/ranger-playground/ranger/jisql/target/jisql-2.1.0-SNAPSHOT.jar jisql/lib/jisql-2.1.0-SNAPSHOT.jar &&
+          ln -s /workspace/m2-repository/net/sf/jopt-simple/jopt-simple/3.2/jopt-simple-3.2.jar jisql/lib/jopt-simple-3.2.jar &&
+          python2 dba_script.py -q &&
+          python2 db_setup.py 
+
     command: 'echo "TODO: Replace with command to start project"'
