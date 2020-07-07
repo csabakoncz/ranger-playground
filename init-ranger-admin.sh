@@ -17,7 +17,7 @@ ln -s /workspace/ranger-playground/ranger/jisql/target/jisql-2.1.0-SNAPSHOT.jar 
 ln -s /workspace/m2-repository/net/sf/jopt-simple/jopt-simple/3.2/jopt-simple-3.2.jar jisql/lib/jopt-simple-3.2.jar && \
 \
 mkdir ews && \
-ln -s /workspace/ranger-playground/ranger/security-admin/target/security-admin-web-2.1.0-SNAPSHOT security-admin/ews/webapp && \
+ln -s /workspace/ranger-playground/ranger/security-admin/target/security-admin-web-2.1.0-SNAPSHOT ews/webapp && \
 ln -s /workspace/ranger-playground/ranger/security-admin/target/security-admin-web-2.1.0-SNAPSHOT/WEB-INF/classes/conf.dist/ target/security-admin-web-2.1.0-SNAPSHOT/WEB-INF/classes/conf && \
 \
 RANGER_ADMIN_CONF=`pwd`/scripts python2 scripts/dba_script.py -q && \
