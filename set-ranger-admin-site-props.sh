@@ -13,5 +13,5 @@ python2.7 ./scripts/update_property.py ranger.jpa.jdbc.password 'Rangerpassword@
 
 if [ "$DB_FLAVOR" == "MSSQL" ]
     then
-python2.7 ./scripts/update_property.py ranger.jpa.jdbc.url 'jdbc:log4jdbc:sqlserver://localhost\;databaseName=ranger' src/main/resources/conf.dist/ranger-admin-site.xml
+python2.7 ./scripts/update_property.py ranger.jpa.jdbc.url 'jdbc:log4jdbc:sqlserver://localhost;databaseName=ranger' src/main/resources/conf.dist/ranger-admin-site.xml
 fi
