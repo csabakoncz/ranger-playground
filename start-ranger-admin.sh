@@ -1,6 +1,9 @@
+export MAVEN_REPO=`mvn help:evaluate -Dexpression=settings.localRepository -q -DforceStdout`
+
 CP=`cat classpath.out`
 CP=$CP:target/embeddedwebserver-2.1.0-SNAPSHOT.jar
-CP=$CP:/workspace/m2-repository/mysql/mysql-connector-java/8.0.20/mysql-connector-java-8.0.20.jar
+CP=$CP:$MAVEN_REPO/mysql/mysql-connector-java/8.0.20/mysql-connector-java-8.0.20.jar
+CP=$CP:$MAVEN_REPO/com/microsoft/sqlserver/mssql-jdbc/8.2.2.jre8/mssql-jdbc-8.2.2.jre8.jar
 CP=$CP:../security-admin/src/main/resources/conf.dist
 
 java \

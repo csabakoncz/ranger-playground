@@ -8,3 +8,10 @@ echo "<property><name>servername</name><value>rangeradmin</value><description></
 echo "</configuration>" >> /tmp/site.xml.tmp
 
 mv /tmp/site.xml.tmp src/main/resources/conf.dist/ranger-admin-site.xml
+
+python2.7 ./scripts/update_property.py ranger.jpa.jdbc.password 'Rangerpassword@123' src/main/resources/conf.dist/ranger-admin-site.xml
+
+if [ "$DB_FLAVOR" == "MSSQL" ]
+    then
+python2.7 ./scripts/update_property.py ranger.jpa.jdbc.url 'jdbc:log4jdbc:sqlserver://localhost\;databaseName=ranger' src/main/resources/conf.dist/ranger-admin-site.xml
+fi
