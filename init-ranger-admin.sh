@@ -14,7 +14,9 @@ if [ "$DB_FLAVOR" == "MSSQL" ]
 fi
 
 
-cd ranger && \
+cd ranger
+export RANGER_VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout`
+
 echo "<configuration></configuration>" > security-admin/src/main/resources/conf.dist/core-site.xml && \
 \
 mvn -am -pl security-admin,embeddedwebserver,jisql -DskipTests package && \
@@ -23,17 +25,17 @@ mvn -am -pl embeddedwebserver -Dmdep.outputFile=classpath.out dependency:build-c
 cd security-admin && \
 \
 mkdir -p jisql/lib && \
-ln -s `pwd`/../jisql/target/jisql-2.1.0-SNAPSHOT.jar jisql/lib/jisql-2.1.0-SNAPSHOT.jar && \
+ln -s `pwd`/../jisql/target/jisql-${RANGER_VERSION}.jar jisql/lib/jisql-${RANGER_VERSION}.jar && \
 ln -s ${MAVEN_REPO}/net/sf/jopt-simple/jopt-simple/3.2/jopt-simple-3.2.jar jisql/lib/jopt-simple-3.2.jar && \
 \
 mkdir ews && \
-ln -s `pwd`/target/security-admin-web-2.1.0-SNAPSHOT ews/webapp && \
-ln -s `pwd`/target/security-admin-web-2.1.0-SNAPSHOT/WEB-INF/classes/conf.dist/ target/security-admin-web-2.1.0-SNAPSHOT/WEB-INF/classes/conf && \
+ln -s `pwd`/target/security-admin-web-${RANGER_VERSION} ews/webapp && \
+ln -s `pwd`/target/security-admin-web-${RANGER_VERSION}/WEB-INF/classes/conf.dist/ target/security-admin-web-${RANGER_VERSION}/WEB-INF/classes/conf && \
 \
-RANGER_ADMIN_CONF=`pwd`/scripts python2 scripts/dba_script.py -q && \
-RANGER_ADMIN_CONF=`pwd`/scripts python2 scripts/db_setup.py && \
+RANGER_ADMIN_CONF=`pwd`/scripts python2.7 scripts/dba_script.py -q && \
+RANGER_ADMIN_CONF=`pwd`/scripts python2.7 scripts/db_setup.py && \
 \
 ../../set-ranger-admin-site-props.sh && \
-rm -rf ./target/security-admin-web-2.1.0-SNAPSHOT/WEB-INF/lib/ranger-plugins-audit-*.jar && \
+rm -rf ./target/security-admin-web-${RANGER_VERSION}/WEB-INF/lib/ranger-plugins-audit-*.jar && \
 \
 echo "init-ranger-admin DONE"
