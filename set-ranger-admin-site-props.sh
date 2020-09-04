@@ -8,6 +8,8 @@ echo "<property><name>servername</name><value>rangeradmin</value><description></
 if [ "$DB_FLAVOR" == "MSSQL" ]
     then
     echo "<property><name>xa.db.flavor</name><value>MSSQL</value><description></description></property>" >> /tmp/site.xml.tmp
+    echo "<property><name>ranger.jpa.jdbc.dialect</name><value>org.eclipse.persistence.platform.database.SQLServerPlatform</value><description></description></property>" >> /tmp/site.xml.tmp
+    echo "<property><name>ranger.jpa.audit.jdbc.dialect</name><value>org.eclipse.persistence.platform.database.SQLServerPlatform</value><description></description></property>" >> /tmp/site.xml.tmp
 fi
 echo "</configuration>" >> /tmp/site.xml.tmp
 
