@@ -4,6 +4,8 @@
 This project uses `gitpod/workspace-mysql` Docker image. On workspace creation a MySQL DB is started,
 the init script builds Ranger admin and starts the webapp.
 
+Click here to have a Gitpod workspace created: https://gitpod.io/#https://github.com/csabakoncz/ranger-playground
+
 ## MySQL DB on localhost
 Should work, but the steps need to be specified. TBD
 
@@ -29,10 +31,8 @@ cd ranger/embeddedwebserver && ../../start-ranger-admin.sh
 docker exec -it ranger-mssql /opt/mssql-tools/bin/sqlcmd -d ranger -U rangeradmin -P 'Rangerpassword@123'
 
 ALTER TABLE [dbo].[x_group] DROP CONSTRAINT x_group$x_group_UK_group_name;
-GO
 
 alter table x_group alter column group_name nvarchar(1700);
-GO
 
 alter table x_group add CONSTRAINT [x_group$x_group_UK_group_name] UNIQUE NONCLUSTERED ( [group_name] ASC ) WITH (PAD_INDEX = OFF,STATISTICS_NORECOMPUTE = OFF,IGNORE_DUP_KEY = OFF,ALLOW_ROW_LOCKS = ON,ALLOW_PAGE_LOCKS = ON) ON [PRIMARY];
 GO
