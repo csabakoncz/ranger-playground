@@ -19,7 +19,9 @@ export RANGER_VERSION=`mvn help:evaluate -Dexpression=project.version -q -Dforce
 
 echo "<configuration></configuration>" > security-admin/src/main/resources/conf.dist/core-site.xml && \
 \
-mvn -am -pl security-admin,embeddedwebserver,jisql -DskipTests package -Dmdep.outputFile=classpath.out dependency:build-classpath && \
+mvn -am -pl security-admin,embeddedwebserver,jisql -DskipTests package \
+ -Dmaven.wagon.http.retryHandler.count=3 \
+ -Dmdep.outputFile=classpath.out dependency:build-classpath && \
 \
 cd security-admin && \
 \
