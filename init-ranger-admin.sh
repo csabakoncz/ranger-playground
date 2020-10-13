@@ -1,3 +1,5 @@
+set -x
+
 export MAVEN_REPO=`mvn help:evaluate -Dexpression=settings.localRepository -q -DforceStdout`
 
 mvn dependency:get -Dartifact='mysql:mysql-connector-java:8.0.20'

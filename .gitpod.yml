@@ -1,5 +1,5 @@
 image: gitpod/workspace-mysql
 
 tasks:
-  - init: 'DB_FLAVOR=MYSQL ./init-ranger-admin.sh | tee init.log'
+  - init: 'DB_FLAVOR=MYSQL ./init-ranger-admin.sh 2>&1 | tee init.log'
     command: 'cd ranger/embeddedwebserver && ../../start-ranger-admin.sh'
