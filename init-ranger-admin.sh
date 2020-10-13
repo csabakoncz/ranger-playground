@@ -23,6 +23,7 @@ echo "<configuration></configuration>" > security-admin/src/main/resources/conf.
 \
 mvn -am -pl security-admin,embeddedwebserver,jisql -DskipTests package \
  -Dmaven.wagon.http.retryHandler.count=3 \
+ -Denunciate.skip=true \
  -Dmdep.outputFile=classpath.out dependency:build-classpath && \
 \
 cd security-admin && \
